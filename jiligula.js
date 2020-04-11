@@ -3,30 +3,25 @@
 Java.perform(function(){
   
   console.log("------------")
-  // var application = Java.use("com.jiliguala.niuwa.MyApplication");
-  // application.attachBaseContext.overload('android.content.Context').implementation = function(context) {
-  //   console.log("Hook MyApplication")
-  //   var g = Java.use("com.jiliguala.niuwa.common.util.b.a.g");
-  //   g = true
-  // }
 
 
-var detailActivity = Java.use("com.jiliguala.niuwa.module.superroadmap.subcourse.RoadMapDetailActivity");
 
-detailActivity.onCreate.overload('android.os.Bundle').implementation = function(bundle){
-    console.log("RoadMapDetailActivity#onCreate")
+  var detailActivity = Java.use("com.jiliguala.niuwa.module.superroadmap.subcourse.RoadMapDetailActivity");
 
-    this.onCreate(bundle);
+  detailActivity.onCreate.overload('android.os.Bundle').implementation = function(bundle){
+      console.log("RoadMapDetailActivity#onCreate")
 
+      this.onCreate(bundle);
+
+      
     
-   
-    var a = Java.use("com.jiliguala.niuwa.common.util.b.a");
+      var a = Java.use("com.jiliguala.niuwa.common.util.b.a");
 
-    var Log = Java.use("android.util.Log");
-    Log.i("andyT", "andy---"+a.g);
+      var Log = Java.use("android.util.Log");
+      Log.i("andyT", "andy---"+a.g);
 
-    console.log("RoadMapDetailActivity#onCreate234")
-}
+      console.log("RoadMapDetailActivity#onCreate234")
+  }
 
 
 

@@ -6,6 +6,36 @@ function myEarch(arr){
         console.log("item : "+i)
     }
 }
+
+//refSetStaticString(A, "flag", "dev")
+function refSetStaticString(aClass, field, val) {
+    var f = aClass.class.getDeclaredField(field);
+    f.setAccessible(true);
+    f.set("java.lang.Object", val);
+}
+
+//refSetStaticBoolean(A, "flag", true)
+function refSetStaticBoolean(aClass, field, val) {
+    var f = aClass.class.getDeclaredField(field);
+    f.setAccessible(true);
+    f.setBoolean("java.lang.Boolean", val);//必须是字符串"java.lang.Boolean"或"java.lang.Object"不能是Java.use()的返回类型
+}
+
+//refSetString(this, "flag", "dev")//还没测试
+function refSetString(obj, field, val) {
+    var f = obj.getClass().getDeclaredField(field);
+    f.setAccessible(true);
+    f.set(obj, val);
+}
+
+//refSetBoolean(this, "flag", true)
+function refSetBoolean(obj, field, val) {
+    var f = obj.getClass().getDeclaredField(field);
+    f.setAccessible(true);
+    f.setBoolean(obj, val);
+}
+
+
 Java.perform(function(){
     console.log("------------")
 
@@ -16,20 +46,20 @@ Java.perform(function(){
  
         //日志开关
         var a = Java.use("com.jiliguala.niuwa.common.util.b.a");//com.jiliguala.niuwa.common.util.b.a.g
-        a.class.getDeclaredField("d").set("java.lang.Object", "dev");
+        refSetStaticString(a, "d", "dev")
 
-        //a/b test调试助手 开关。StethoInterceptor开关
+        //a/b test调试助手、StethoInterceptor开关
         //搜.enableDebugAssist(com.jiliguala.niuwa.common.util.b.a.g)
         //搜new StethoInterceptor()
-        a.class.getDeclaredField("g").setBoolean("java.lang.Boolean", true);//必须是字符串"java.lang.Boolean"或"java.lang.Object"
+        refSetStaticBoolean(a, "g", true)
 
-
-        //a/b test调试助手 关闭,太烦人
+        //关闭 a/b test调试助手 ,太烦人
         var abtest = Java.use("com.adhoc.config.AdhocConfig$Builder");//注意内部类的表示方式
         abtest.enableDebugAssist.implementation = function(z){
             console.log("enableDebugAssist")
             // this.mDebug = true//只能用反射修改
             // this.getClass().getDeclaredField('mDebug').setBoolean(this, false)
+            refSetBoolean(this, "mDebug", false)
             return this
         }
         
