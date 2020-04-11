@@ -1,11 +1,11 @@
 ///<reference path='D:/apps/frida-gum.d.ts'/>
 console.log('------------Agent speaking from PID', Process.id);
 
-function myEarch(arr){
+function myEach(arr){
     for (var i in arr) {
-        console.log("item : "+i)
+        console.log("item : "+JSON.stringify(arr[i]))
     }
-}
+  }
 
 //refSetStaticString(A, "flag", "dev")
 function refSetStaticString(aClass, field, val) {
@@ -58,7 +58,6 @@ Java.perform(function(){
         abtest.enableDebugAssist.implementation = function(z){
             console.log("enableDebugAssist")
             // this.mDebug = true//只能用反射修改
-            // this.getClass().getDeclaredField('mDebug').setBoolean(this, false)
             refSetBoolean(this, "mDebug", false)
             return this
         }
