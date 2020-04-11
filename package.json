@@ -1,0 +1,14 @@
+{
+  "name": "jiliguala_frida",
+  "version": "1.0.0",
+  "description": "",
+  "main": "spawn_gating.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "frida": "^12.8.20"
+  }
+}
